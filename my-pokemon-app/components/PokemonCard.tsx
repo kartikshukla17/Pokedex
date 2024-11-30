@@ -23,7 +23,7 @@ interface PokemonDetails {
   abilities: Ability[];
 }
 
-const RoyalPokemonCard: React.FC<PokemonCardProps> = ({ 
+const PokemonCard: React.FC<PokemonCardProps> = ({ 
   id, name, types, sprite, darkMode 
 }) => {
   const [flipped, setFlipped] = useState(false);
@@ -66,7 +66,7 @@ const RoyalPokemonCard: React.FC<PokemonCardProps> = ({
       className={`
         relative w-64 h-96 perspective cursor-pointer 
         transform transition-all duration-300 hover:scale-105
-        shadow-xl rounded-2xl 
+        shadow-xl rounded-2x1 rounded-s-sm 
         ${cardClasses}
       `}
       onClick={() => setFlipped((prev) => !prev)}
@@ -77,25 +77,24 @@ const RoyalPokemonCard: React.FC<PokemonCardProps> = ({
           transform-style-3d ${flipped ? "rotate-y-180" : ""}
         `}
       >
-        {/* Front Side */}
         <div className="
           absolute w-full h-full flex flex-col items-center justify-center 
           p-6 text-center backface-hidden
-          bg-gradient-to-br from-purple-100 to-purple-200 
-          dark:from-gray-700 dark:to-gray-800
+          bg-gradient-to-br from-blue-100 via-yellow-50 to-red-100 
+          dark:from-gray-800 dark:via-gray-700 dark:to-gray-900
+
         ">
           <div className="
             w-40 h-40 bg-white dark:bg-gray-700 
             rounded-full flex items-center justify-center 
-            shadow-md mb-4 border-4 border-purple-300
-          ">
+            shadow-lg mb-4 border-4 border-yellow-400 dark:border-gray-600          ">
             <img
               src={sprite || defaultSprite}
               alt={name}
               className="w-32 h-32 object-contain"
             />
           </div>
-          <h2 className="text-2xl font-bold text-purple-800 dark:text-purple-300 capitalize">
+          <h2 className="text-2xl font-bold text-blue-600 dark:text-yellow-400 capitalize">
             {name}
           </h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">#{id}</p>
@@ -104,9 +103,9 @@ const RoyalPokemonCard: React.FC<PokemonCardProps> = ({
               <span
                 key={type}
                 className="
-                  bg-purple-200 dark:bg-gray-600 
-                  text-purple-800 dark:text-purple-300
-                  text-xs px-3 py-1 rounded-full uppercase
+                  bg-yellow-200 dark:bg-gray-700 
+                  text-blue-700 dark:text-yellow-300
+                  text-xs px-3 py-1 rounded-full uppercase shadow-sm
                 "
               >
                 {type}
@@ -115,23 +114,22 @@ const RoyalPokemonCard: React.FC<PokemonCardProps> = ({
           </div>
         </div>
 
-        {/* Back Side */}
         <div className="
           absolute w-full h-full backface-hidden transform rotate-y-180
-          bg-gradient-to-br from-purple-200 to-purple-300
-          dark:from-gray-800 dark:to-gray-900
+          bg-gradient-to-br from-yellow-400 via-orange-200 to-red-400
+          dark:from-gray-800 dark:via-gray-700 dark:to-gray-900
           p-6 text-center flex flex-col justify-center
         ">
           {loading ? (
-            <p className="text-purple-800 dark:text-white">Loading details...</p>
+            <p className="text-blue-600 dark:text-yellow-300">Loading details...</p>
           ) : error ? (
-            <p className="text-red-500">{error}</p>
+            <p className="text-red-500 dark:text-red-400">{error}</p>
           ) : pokemonDetails ? (
             <>
-              <h2 className="text-2xl font-bold text-purple-900 dark:text-purple-200 capitalize mb-4">
+              <h2 className="text-3xl font-bold text-blue-900 dark:text-yellow-300 capitalize mb-4">
                 {pokemonDetails.name}
               </h2>
-              <div className="space-y-2 text-purple-800 dark:text-gray-200">
+              <div className="space-y-2 text-blue-700 dark:text-gray-200">
                 <p>Height: {pokemonDetails.height / 10} m</p>
                 <p>Weight: {pokemonDetails.weight / 10} kg</p>
                 <p>Base Experience: {pokemonDetails.base_experience}</p>
@@ -149,7 +147,7 @@ const RoyalPokemonCard: React.FC<PokemonCardProps> = ({
               </div>
             </>
           ) : (
-            <p className="text-purple-800 dark:text-white">No details available.</p>
+            <p className="text-blue-600 dark:text-yellow-300">No details available.</p>
           )}
         </div>
       </div>
@@ -157,4 +155,4 @@ const RoyalPokemonCard: React.FC<PokemonCardProps> = ({
   );
 };
 
-export default RoyalPokemonCard;
+export default PokemonCard;

@@ -1,38 +1,46 @@
 import React from 'react';
 
 interface PokemonTypeFilterProps {
-  availableTypes: string[]; // List of all possible Pokémon types (e.g., "Fire", "Water", etc.)
-  selectedTypes: string[]; // List of currently selected types (user's filter preferences)
-  onTypeSelect: (types: string[]) => void; // Callback function to update the selected types in the parent component
+  availableTypes: string[];
+  selectedTypes: string[];
+  onTypeSelect: (types: string[]) => void;
+  darkMode: boolean;
 }
 
-const PokemonTypeFilter: React.FC<PokemonTypeFilterProps> = ({ availableTypes, selectedTypes, onTypeSelect }) => {
-  // Function to handle type button clicks
+const PokemonTypeFilter: React.FC<PokemonTypeFilterProps> = ({ 
+  availableTypes, 
+  selectedTypes, 
+  onTypeSelect,
+  darkMode 
+}) => {
   const handleTypeClick = (type: string) => {
     if (selectedTypes.includes(type)) {
-      // If the type is already selected, remove it from the selectedTypes list
       onTypeSelect(selectedTypes.filter((t) => t !== type));
     } else {
-      // If the type is not selected, add it to the selectedTypes list
       onTypeSelect([...selectedTypes, type]);
     }
   };
 
   return (
-    <div className="flex flex-wrap gap-2">
-      {/* Loop through availableTypes to create a button for each type */}
-      {availableTypes.map((type) => (
-        <button
-          key={type}
-          onClick={() => handleTypeClick(type)}
-          className={`px-4 py-2 rounded-lg ${
-            selectedTypes.includes(type) ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'
-          }`}
-        >
-          {type}
-        </button>
-      ))}
-    </div>
+      <div className="flex flex-wrap gap-2">
+        {availableTypes.map((type) => (
+          <button
+            key={type}
+            onClick={() => handleTypeClick(type)}
+            className={`
+              px-4 py-2 rounded-lg text-sm font-semibold uppercase tracking-wider
+              transition-all duration-300 ease-in-out 
+              ${selectedTypes.includes(type) 
+                ? 'bg-purple-600 text-white ring-2 ring-purple-300 scale-105' 
+                : `${darkMode 
+                  ? 'bg-gray-700 text-gray-300 hover:bg-gray-600' 
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
+            `}
+          >
+            {type}
+          </button>
+        ))}
+      </div>
   );
 };
 
