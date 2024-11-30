@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Add this to your CSS file (e.g., globals.css or PokemonCard.module.css) */
+.relative {
+  perspective: 1000px; /* Enables the 3D effect */
+}
+
+.w-64 {
+  width: 16rem; /* Define the width of the card */
+}
+
+.h-80 {
+  height: 20rem; /* Define the height of the card */
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg); /* Rotate the card 180 degrees */
+}
+
+.backface-hidden {
+  backface-visibility: hidden; /* Hide the back side when flipped */
+}
+
+.transition-all {
+  transition: transform 0.6s ease-in-out; /* Smooth transition */
+}
+
+/* Ensure 3D perspective */
+.perspective {
+  perspective: 1000px;
+}
+
+/* Allow 3D transforms for the card */
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+/* Hide backface of elements */
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Rotate card on Y-axis */
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
